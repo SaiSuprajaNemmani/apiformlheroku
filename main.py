@@ -8,6 +8,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import pickle
 import json
+import aiofiles
+import asyncio
 
 
 app = FastAPI()
@@ -35,7 +37,13 @@ class model_input(BaseModel):
     
 
 # loading the saved model
-diabetes_model = pickle.load(open('diabetes_model.sav','rb'))
+async def read_file():
+    async with open(‘diabetes_model.sav', 'rb’) as file:
+        diabetes_model = await file.read()
+        print(diabetes_model) 
+
+asyncio.run(read_file())
+
 @app.get("/{name}")
 def hello(name):
     return {"hello {} and welcome to this API".format(name)}
