@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import pickle
 import json
+import asyncio
 
 
 app = FastAPI()
@@ -39,7 +40,7 @@ diabetes_model = pickle.load(open('diabetes_model.sav','rb'))
 
 @app.route('/')
 @app.post('/diabetes_prediction')
-def diabetes_pred(input_parameters : model_input):
+async def diabetes_pred(input_parameters : model_input):
     
     input_data = input_parameters.json()
     input_dictionary = json.load(input_data)
