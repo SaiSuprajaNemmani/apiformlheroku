@@ -40,10 +40,6 @@ diabetes_model = pickle.load(open('diabetes_model.sav','rb'))
 def hello(name):
     return {"hello {} and welcome to this API".format(name)}
 
-@app.get("/")
-def greet():
-    return {"Hello World"}
-
 @app.route('/')
 @app.post('/diabetes_prediction')
 def diabetes_pred(input_parameters : model_input):
@@ -71,4 +67,5 @@ def diabetes_pred(input_parameters : model_input):
     else:
         return 'The person is Diabetic'
 
-
+if __name__=="__main__":
+    uvicorn.run(app)
