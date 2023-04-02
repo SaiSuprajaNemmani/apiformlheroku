@@ -35,14 +35,14 @@ class model_input(BaseModel):
     
 
 # loading the saved model
-diabetes_model = pickle.load(open('diabetes_model.sav','rb'))
+diabetes_model = pickle.load(open('diabetes_model.sav','r+b'))
 
 @app.route('/')
 @app.post('/diabetes_prediction')
 def diabetes_pred(input_parameters : model_input):
     
     input_data = input_parameters.json()
-    input_dictionary = json.load(input_data)
+    input_dictionary = json.loads(input_data)
     
     preg = input_dictionary['Pregnancies']
     glu = input_dictionary['Glucose']
