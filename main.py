@@ -42,7 +42,8 @@ diabetes_model = pickle.load(open('diabetes_model.sav','r+b'))
 def diabetes_pred(input_parameters : model_input):
     
     input_data = input_parameters.json()
-    input_dictionary = json.loads(input_data)
+    input_str = json.dumps(input_data)
+    input_dictionary = json.loads(input_str)
     
     preg = input_dictionary['Pregnancies']
     glu = input_dictionary['Glucose']
