@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Jun 12 11:36:48 2022
 
-@author: siddhardhan
 """
 
 from fastapi import FastAPI
@@ -58,7 +56,7 @@ def diabetes_pred(input_parameters : model_input):
 
     input_list = [preg, glu, bp, skin, insulin, bmi, dpf, age]
     
-    prediction = await diabetes_model.predict([input_list])
+    prediction =  diabetes_model.predict([input_list])
     
     if prediction[0] == 0:
         return 'The person is not Diabetic'
