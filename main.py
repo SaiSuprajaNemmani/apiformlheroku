@@ -44,7 +44,7 @@ diabetes_model = pickle.load(open('diabetes_model.sav','rb'))
 def diabetes_pred(input_parameters : model_input):
     
     input_data = input_parameters.json()
-    input_dictionary = json.dumps(input_data)
+    input_dictionary = json.load(input_data)
     
     preg = input_dictionary['Pregnancies']
     glu = input_dictionary['Glucose']
@@ -58,7 +58,7 @@ def diabetes_pred(input_parameters : model_input):
 
     input_list = [preg, glu, bp, skin, insulin, bmi, dpf, age]
     
-    prediction = diabetes_model.predict(type[input_list])
+    prediction = diabetes_model.predict([input_list])
     
     if prediction[0] == 0:
         return 'The person is not Diabetic'
