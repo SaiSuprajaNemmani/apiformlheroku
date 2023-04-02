@@ -35,7 +35,14 @@ class model_input(BaseModel):
     
 
 # loading the saved model
-diabetes_model = pickle.load(open('diabetes_model.sav','r+b'))
+diabetes_model = pickle.load(open('diabetes_model.sav','rb'))
+@app.get("/{name}")
+def hello(name):
+    return {"hello {} and welcome to this API".format(name)}
+
+@app.get("/")
+def greet():
+    return {"Hello World"}
 
 @app.route('/')
 @app.post('/diabetes_prediction')
