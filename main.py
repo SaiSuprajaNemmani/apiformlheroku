@@ -39,18 +39,15 @@ def hello(name):
 @app.route('/')
 @app.post('/diabetes_prediction')
 def diabetes_pred(input_parameters : model_input):
-    
-    input_data = input_parameters.json()
-    input_dictionary = json.loads(input_data)
-    
-    preg = input_dictionary['Pregnancies']
-    glu = input_dictionary['Glucose']
-    bp = input_dictionary['BloodPressure']
-    skin = input_dictionary['SkinThickness']
-    insulin = input_dictionary['Insulin']
-    bmi = input_dictionary['BMI']
-    dpf = input_dictionary['DiabetesPedigreeFunction']
-    age = input_dictionary['Age']
+  
+    preg = json.dumps('Pregnancies')     
+    glu = json.dumps('Glucose')
+    bp = json.dumps('BloodPressure')
+    skin = json.dumps('SkinThickness')
+    insulin = json.dumps('Insulin')
+    bmi = json.dumps('BMI')
+    dpf = json.dumps('DiabetesPedigreeFunction')
+    age = json.dumps('Age')
 
     input_list = [preg, glu, bp, skin, insulin, bmi, dpf, age]
     
