@@ -49,7 +49,8 @@ async def main():
     await asyncio.run(read_file())
     print("Main resumed")
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 @app.get("/{name}")
 def hello(name):
@@ -81,6 +82,3 @@ def diabetes_pred(input_parameters : model_input):
     
     else:
         return 'The person is Diabetic'
-
-if __name__=="__main__":
-    uvicorn.run(app)
