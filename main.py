@@ -42,8 +42,14 @@ async def read_file():
         delay = 5
         await asyncio.sleep(delay)
         print(diabetes_model) 
+        
+async def main():
+    print("Main started")
+    await asyncio.sleep(2)
+    await asyncio.run(read_file())
+    print("Main resumed")
 
-asyncio.run(read_file())
+asyncio.run(main())
 
 @app.get("/{name}")
 def hello(name):
