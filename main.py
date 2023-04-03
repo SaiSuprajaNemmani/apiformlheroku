@@ -1,14 +1,8 @@
-# -*- coding: utf-8 -*-
-"""
-
-"""
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import pickle
 import json
-import asyncio
 
 
 app = FastAPI()
@@ -36,21 +30,7 @@ class model_input(BaseModel):
     
 
 # loading the saved model
-async def read_file():
-    with open('diabetes_model.sav','rb') as file:
-        diabetes_model = file.read()
-        delay = 5
-        await asyncio.sleep(delay)
-    return diabetes_model
-        
-async def main():
-    print("Main started")
-    await asyncio.sleep(2)
-    await asyncio.run(read_file())
-    print("Main resumed")
-
-if __name__ == "__main__":
-    asyncio.run(main())
+diabetes_model = pickle.load(open('diabetes_model.sav','rb'))
 
 @app.get("/{name}")
 def hello(name):
@@ -61,7 +41,7 @@ def hello(name):
 def diabetes_pred(input_parameters : model_input):
     
     input_data = input_parameters.json()
-    input_dictionary = json.load(input_data)
+    input_dictionary = json.loads(input_data)
     
     preg = input_dictionary['Pregnancies']
     glu = input_dictionary['Glucose']
@@ -72,10 +52,9 @@ def diabetes_pred(input_parameters : model_input):
     dpf = input_dictionary['DiabetesPedigreeFunction']
     age = input_dictionary['Age']
 
-
     input_list = [preg, glu, bp, skin, insulin, bmi, dpf, age]
     
-    prediction =  diabetes_model.predict([input_list])
+    prediction = diabetes_model.predict([input_list])
     
     if prediction[0] == 0:
         return 'The person is not Diabetic'
