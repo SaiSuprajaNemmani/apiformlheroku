@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Jun 12 11:36:48 2022
+
+@author: siddhardhan
+"""
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -32,22 +39,22 @@ class model_input(BaseModel):
 # loading the saved model
 diabetes_model = pickle.load(open('diabetes_model.sav','rb'))
 
-@app.get("/{name}")
-def hello(name):
-    return {"hello {} and welcome to this API".format(name)}
 
-@app.route('/')
 @app.post('/diabetes_prediction')
 def diabetes_pred(input_parameters : model_input):
-  
-    preg = json.dumps('Pregnancies')     
-    glu = json.dumps('Glucose')
-    bp = json.dumps('BloodPressure')
-    skin = json.dumps('SkinThickness')
-    insulin = json.dumps('Insulin')
-    bmi = json.dumps('BMI')
-    dpf = json.dumps('DiabetesPedigreeFunction')
-    age = json.dumps('Age')
+    
+    input_data = input_parameters.json()
+    input_dictionary = json.loads(input_data)
+    
+    preg = input_dictionary['Pregnancies']
+    glu = input_dictionary['Glucose']
+    bp = input_dictionary['BloodPressure']
+    skin = input_dictionary['SkinThickness']
+    insulin = input_dictionary['Insulin']
+    bmi = input_dictionary['BMI']
+    dpf = input_dictionary['DiabetesPedigreeFunction']
+    age = input_dictionary['Age']
+
 
     input_list = [preg, glu, bp, skin, insulin, bmi, dpf, age]
     
@@ -58,3 +65,5 @@ def diabetes_pred(input_parameters : model_input):
     
     else:
         return 'The person is Diabetic'
+
+
