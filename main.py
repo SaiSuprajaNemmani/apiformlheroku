@@ -61,9 +61,9 @@ def diabetes_pred(input_parameters : model_input):
     prediction = diabetes_model.predict([input_list])
     
     if prediction[0] == 0:
-        return 'The person is not Diabetic'
+        return 'Patient is not Diabetic'
     
     else:
-        return 'The person is Diabetic'
+        return 'Patient is Diabetic'
 
 
