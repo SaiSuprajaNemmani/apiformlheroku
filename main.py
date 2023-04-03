@@ -38,7 +38,7 @@ class model_input(BaseModel):
 # loading the saved model
 async def read_file():
     async with open('diabetes_model.sav','rb') as file:
-        diabetes_model = await file.read()
+        diabetes_model = file.read()
         delay = 5
         await asyncio.sleep(delay)
         print(diabetes_model) 
