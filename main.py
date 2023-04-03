@@ -41,7 +41,7 @@ async def read_file():
         diabetes_model = file.read()
         delay = 5
         await asyncio.sleep(delay)
-        return diabetes_model
+    return diabetes_model
         
 async def main():
     print("Main started")
